@@ -1,0 +1,41 @@
+进程的同步互斥
+
+	临界资源:多个进程或者线程都能够操作的共享资源
+	临界区:操作临界资源的代码段
+
+	同步:同步是一种合作关系,为完成某个任务,多进程或者多线程之间形成一种协调,按照约定或条件执行操作临界资源
+
+	互斥:互斥是一种制约关系,当一个进程或者线程使用临界资源时进行上锁处理,当另一个进程使用时会阻塞等待,直到解锁后才能继续使用
+
+>>> Event 事件
+	from multiprocessing import Event
+	创建事件对象
+	e = Event()
+
+	设置事件阻塞,等待条件满足
+	e.wait([timeout])
+
+	事件设置
+	e.set() # 当事件被设置后e.wait()不再阻塞
+
+	清除设置 
+	e.clear()	# 当事件设置被clear后e.wait()又会阻塞
+
+	事件状态判断
+	e.is_set()	# 判断事件是否被设置
+
+	示例: 见 wait_test.py
+	练习: 见 process_event.py
+
+>>>　Lock 锁
+	from multiprocessing import Lock
+	创建锁对象
+	lock = Lock()
+
+	lock.acquire()	上锁 如果锁已经是上锁状态,调用此函数会阻塞
+	lock.release()	解锁
+
+	示例: 见 process_lock.py
+
+	* with lock:	(自动上锁/代码执行结束自动解锁)
+		...

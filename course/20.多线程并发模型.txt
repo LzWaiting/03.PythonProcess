@@ -1,0 +1,34 @@
+多线程并发
+
+	threading 的多线程并发
+
+	对比多进程并发:
+		* 消耗资源较少
+		* 线程应该更注意共享资源的操作
+		* 在Python中应该注意GIL问题,网络延迟较高,线程并发也是一种可行的办法
+
+	实现步骤:
+		1. 创建套接字,绑定监听
+		2. 接收客户端请求,创建新的线程
+		3. 主线程继续接收其他客户端连接
+		4. 分支线程启动对应的函数处理客户端请求
+		5. 当客户端断开,则分支线程结束
+
+	示例:见 code/example/thread_server.py
+
+>>>	cookie:
+	
+	import traceback
+
+	traceback.print_exc()
+		功能:更详细的打印异常信息
+
+	示例:
+		import traceback
+
+		a = 10
+
+		try:
+			b = a / 0
+		except Exception:
+			traceback.print_exc()

@@ -1,0 +1,8 @@
+创建自己的线程类
+	
+	步骤
+		1. 继承Thread类
+		2. 加载Thread类中的__init__
+		3. 重写run方法
+
+	示例: 见 myThread.py

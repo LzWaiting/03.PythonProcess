@@ -1,0 +1,18 @@
+线程通信
+
+	通信方式:多个线程共享进程的空间,所以线程间通信使用全局变量完成
+	注意事项:线程间使用全局变量往往要同步互斥机制保证通信安全
+
+	线程同步互斥方法
+		线程的 event
+		e = threading.Event()	创建事件对象
+		e.wait([timeout])		如果e为设置状态则不阻塞,否则阻塞
+		e.set()					将e变为设置状态
+		e.clear()				清除设置
+		示例: 见 thread_event.py
+
+	线程锁
+		lock = threading.Lock()		创建锁对象
+		lock.acquire()				上锁
+		lock.release()				解锁
+		* 也可以通过with上锁,上锁状态调用acquire会阻塞

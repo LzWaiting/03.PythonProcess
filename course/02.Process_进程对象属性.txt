@@ -1,0 +1,23 @@
+Process 进程对象属性
+
+	p.start() p.join()
+
+	p.is_alive()
+		作用:判断进程生命周期状态,处于生命周期返回True,否则返回False
+	p.name 进程名称 默认为 Process-1
+	p.pid  进程的PID号
+	示例:见 process3.py
+	
+	p.daemon
+		默认状态False,主进程退出不会影响子进程执行;
+		如果设置为True,则子进程会随着主进程结束而结束
+		* 要在start前设置
+		* 一般不和join一起使用
+	示例:见 daemon.py
+
+cookie:
+	守护进程(后台运行的,支撑操作系统默认行为的进程):
+		特点:
+			1. 生命周期特别长,伴随操作系统
+			2. 后台进程,前台无法操控
+			3. 与终端无关,终端无法操作

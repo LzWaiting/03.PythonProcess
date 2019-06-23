@@ -1,0 +1,23 @@
+集成模块(socketserver)的使用
+
+	python2 --> SocketServer
+	python3 --> socketserver
+
+	功能：通过模块的不同类的组合完成多进程/多线程的tcp/udp的并发
+	方法：
+		StreamRequestHandler	处理tcp套接字请求
+		DatagramRequestHandler	处理udp套接字请求
+
+		TCPServer 				创建tcp server
+		UDPServer 				创建udp server
+
+		ForkingMixIn			创建多进程
+		ForkingTCPServer 	--> ForkingMixIn + TCPServer
+		ForkingUDPServer	--> ForkingMixIn + UDPServer
+
+		ThreadingMixIn			创建多线程
+		ThreadingTCPServer	--> ThreadingMixIn + TCPServer
+		ThreadingUDPServer	--> ThreadingMixIn + UDPServer
+
+	示例：见code/example/sock_server.py 	# tcp并发（多进程/多线程）
+		见code/example/sock_server1.py 	# udp并发（多进程/多线程）

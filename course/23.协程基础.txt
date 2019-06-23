@@ -1,0 +1,37 @@
+协程基础
+
+	定义：(纤程，微线程)，协程的本质是一个单线程程序，所以协程不能够使用计算机多核资源
+	作用：能够高效的完成并发任务，占用较少的资源，因此协程的并发量较高
+	原理：通过记录应用层的上下文栈区，实现在运行中进行上下文跳转，达到可以选择性地运行想要运行的部分，以此提高程序的运行效率
+	优点：消耗资源少，无需切换开销，无需同步互斥，IO并发性好
+	缺点：无法利用计算机多核
+	
+	yield --> 协程实现的基本关键字
+	
+	greenlet 模块
+		greenlet.greenlet()	生成协程对象
+		gr.switch()			选择要执行的协程事件
+		示例：见 code/example/greenlet0.py
+
+	gevent 模块
+		1. 将协程事件封装为函数
+		2. 生成协程对象
+			gevent.spawn(func,argv)
+				功能：生成协程对象
+				参数：func 协程函数
+					 argv 给协程函数传参
+				返回值：返回协程对象
+		3. 回收协程
+			gevent.joinall()
+				功能：回收协程
+				参数：列表 将要回收的协程放入列表
+			gevent.sleep()
+				功能：设置协程阻塞，让协程跳转
+				参数：n 阻塞时间
+			示例：见 code/example/gevent_test.py
+
+		> from gevent import monkey
+		monkey.patch_all()
+			功能：修改套接字的IO阻塞行为
+			* 必须在socket导入之前使用
+			示例：见 code/example/gevent_server.py		

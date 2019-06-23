@@ -1,0 +1,61 @@
+信号通信
+
+	一个进程向另一个进程发送一个信号来传递某种讯息,接收者根据接收到的信号进行相应的行为
+
+	kill -l 		# 查看系统信号
+	kill -sig PID	# 向一个进程发送信号
+
+	关于信号:
+		信号名称		信号含义		默认处理方法
+		SIGHUP		连接断开		终止
+		SIGINT		ctrl-c		终止
+		SIGQUIT		ctrl-\		终止
+		SIGTSTP		ctrl-z		暂停
+		SIGKILL		终止一个进程
+		SIGSTOP		暂停一个进程
+		SIGALRM		时钟信号
+		SIGCHLD		子进程状态改变时给父进程发出信号
+
+	python 发送信号
+
+	import signal
+
+	os.kill(pid,sig)
+		功能:发送信号
+		参数:pid	目标进程
+			sig	要发送的信号
+	示例:
+		import os
+		import signal
+
+		# 向PID = 20959发送信号
+		os.kill(20959,signal.SIGKILL)
+
+	signal.alarm(sec)
+		功能:向自身发送时钟信号 --> SIGALRM
+		参数:sec 时钟时间
+		* 进程中只能有一个时钟,第二个时钟会覆盖第一个时间
+		示例: 见 alarm.py
+
+	同步执行:按照顺序逐句执行,一步完成再做下一步
+	异步执行:
+		在执行过程中利用内核记录延迟发生或者准备处理的事件.
+		这样不影响应用层的持续执行,当事件发生时再由内核告知应用层处理
+
+	* 信号是唯一的异步通信方法
+
+	signal.pause()
+		功能:阻塞等待接收一个信号
+
+	signal.signal(signum,handler)	# 异步执行
+		功能:处理信号
+		参数:signum 要处理的信号
+			handler 信号的处理方法
+				SIG_DFL	表示使用默认的方法处理
+				SIG_IGN 表示忽略这个信号
+				func    传入一个函数表示用指定函数处理
+				* def func(sig,frame)	# func函数必须有两个参数
+					参数:sig 捕获到的信号
+						frame 信号对象
+		示例:见signal_0.py
+			见signal_1.py
